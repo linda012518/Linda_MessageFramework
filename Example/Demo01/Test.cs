@@ -1,12 +1,11 @@
 using Framework;
 using UnityEngine;
 
-public class Test : BaseNone
+public class Test : BaseMono
 {
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         Bind(666);
     }
 
