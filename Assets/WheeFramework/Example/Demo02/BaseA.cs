@@ -1,9 +1,6 @@
 using Framework;
 
-public class BaseA : BaseMono<A_Manager>
+public class BaseA : BaseMono
 {
-    void Awake()
-    {
-        mgr = A_Manager.Instance;
-    }
+
 }

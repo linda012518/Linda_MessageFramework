@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Framework
 {
-    public class BaseMono<T> : MonoBehaviour, IExecuteHandler where T : BaseManager<T>
+    public class BaseMono : MonoBehaviour, IExecuteHandler
     {
         protected List<int> list = new List<int>();
-        protected T mgr;
 
         public virtual void Execute(int eventCode, params object[] message)
         {
@@ -21,7 +20,7 @@ namespace Framework
                     continue;
 
                 list.Add(eventCodes[i]);
-                mgr.Add(eventCodes[i], this);
+                MessageManager.Instance.Add(eventCodes[i], this);
             }
         }
 
@@ -29,21 +28,21 @@ namespace Framework
         {
             if (list != null && list.Count > 0)
             {
-                mgr.Remove(list.ToArray(), this);
+                MessageManager.Instance.Remove(list.ToArray(), this);
                 list.Clear();
                 list = null;
             }
         }
 
-        public virtual void OnDestroy()
+        public virtual void OnApplicationQuit()
         {
             if (list != null)
                 UnBind();
         }
 
-        protected void Dispatch(AreaCode areaCode, int eventCode, params object[] message)
+        protected void Dispatch(int eventCode, params object[] message)
         {
-            mgr.Dispatch(areaCode, eventCode, message);
+            MessageManager.Instance.Execute(eventCode, message);
         }
 
     }

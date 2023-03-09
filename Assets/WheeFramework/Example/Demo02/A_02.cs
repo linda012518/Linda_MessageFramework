@@ -16,11 +16,17 @@ public class A_02 : BaseA
         await Task.CompletedTask;
     }
 
+    public override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+        Debug.Log("A_02");
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Dispatch(AreaCode.Test, 123, "hello, my name is A_02 !!!");
+            Dispatch(123, "hello, my name is A_02 !!!");
         }
     }
 }

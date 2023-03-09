@@ -20,7 +20,7 @@ namespace Common
 				return instance;
 			}
 		}
-		
-		void OnApplicationQuit () { if (instance != null) instance = null; }
+
+		public virtual void OnDestroy() { if (instance != null) instance = null; }
 	}
 }
